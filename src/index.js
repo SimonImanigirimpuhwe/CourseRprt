@@ -14,9 +14,9 @@ app.use(cors());
 app.use(helmet());
 app.use(compression());
 app.use(express.json());
-app.use('/api/v1/admins', adminRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/report', reportRouter);
+app.use('/api/admins', adminRouter);
+app.use('/api/users', userRouter);
+app.use('/api/report', reportRouter);
 
 app.get('/', (req, res)=>{
     res.status(200).json({msg:'A warmth Welcome to daily courses report.'})
