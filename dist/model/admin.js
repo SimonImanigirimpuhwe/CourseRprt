@@ -29,9 +29,6 @@ var adminSchema = new _mongoose["default"].Schema({
   email: {
     type: String,
     required: true
-  },
-  status: {
-    isProfessional: Boolean
   }
 });
 

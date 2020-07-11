@@ -48,8 +48,8 @@ var UserController = /*#__PURE__*/function () {
                   break;
                 }
 
-                return _context.abrupt("return", res.status(400).send({
-                  msg: "User with regNumber ".concat(user.regNumber, " was registered before")
+                return _context.abrupt("return", res.status(400).json({
+                  error: "User with regNumber ".concat(user.regNumber, " was registered before")
                 }));
 
               case 5:
@@ -69,7 +69,10 @@ var UserController = /*#__PURE__*/function () {
 
               case 9:
                 savedCp = _context.sent;
-                res.status(200).send(savedCp);
+                res.status(200).send({
+                  msg: 'Class Representative added successfully',
+                  savedCp: savedCp
+                });
                 _context.next = 16;
                 break;
 
@@ -117,7 +120,7 @@ var UserController = /*#__PURE__*/function () {
                 }
 
                 return _context2.abrupt("return", res.status(401).json({
-                  msg: 'Unauthorized'
+                  error: 'Unauthorized'
                 }));
 
               case 5:
@@ -132,7 +135,7 @@ var UserController = /*#__PURE__*/function () {
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](5);
                 return _context2.abrupt("return", res.status(500).send({
-                  msg: 'Internal error'
+                  error: 'Internal error'
                 }));
 
               case 13:
@@ -174,13 +177,16 @@ var UserController = /*#__PURE__*/function () {
 
               case 3:
                 newUser = _context3.sent;
-                return _context3.abrupt("return", res.status(200).send(newUser));
+                return _context3.abrupt("return", res.status(200).send({
+                  msg: 'User updated successfully',
+                  newUser: newUser
+                }));
 
               case 7:
                 _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
                 return _context3.abrupt("return", res.status(500).json({
-                  msg: "User with given regNumber is not found"
+                  error: "User with given regNumber is not found"
                 }));
 
               case 10:
@@ -220,7 +226,7 @@ var UserController = /*#__PURE__*/function () {
                 _context4.prev = 7;
                 _context4.t0 = _context4["catch"](0);
                 return _context4.abrupt("return", res.status(400).json({
-                  msg: "Class Representative with given regNumber  is not found"
+                  error: "Class Representative with given regNumber  is not found"
                 }));
 
               case 10:
@@ -238,40 +244,104 @@ var UserController = /*#__PURE__*/function () {
       return deleteUser;
     }()
   }, {
-    key: "usersList",
+    key: "searchUser",
     value: function () {
-      var _usersList = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-        var user;
+      var _searchUser = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+        var searchedUser;
         return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return _user["default"].find().sort('school');
-
-              case 3:
-                user = _context5.sent;
-                res.status(200).send(user);
-                _context5.next = 10;
-                break;
-
-              case 7:
-                _context5.prev = 7;
-                _context5.t0 = _context5["catch"](0);
-                res.status(400).json({
-                  error: _context5.t0.message
+                return _user["default"].find({
+                  $or: [{
+                    firstName: req.body.firstName
+                  }, {
+                    lastName: req.body.lastName
+                  }, {
+                    regNumber: req.body.regNumber
+                  }]
                 });
 
-              case 10:
+              case 3:
+                searchedUser = _context5.sent;
+
+                if (!(searchedUser.length === 0)) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                return _context5.abrupt("return", res.status(400).json({
+                  error: 'No such user in database'
+                }));
+
+              case 6:
+                res.status(200).send({
+                  searchedUser: searchedUser
+                });
+                _context5.next = 12;
+                break;
+
+              case 9:
+                _context5.prev = 9;
+                _context5.t0 = _context5["catch"](0);
+                return _context5.abrupt("return", res.status(500).send({
+                  error: 'Internal error'
+                }));
+
+              case 12:
+                ;
+
+              case 13:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 7]]);
+        }, _callee5, null, [[0, 9]]);
       }));
 
-      function usersList(_x9, _x10) {
+      function searchUser(_x9, _x10) {
+        return _searchUser.apply(this, arguments);
+      }
+
+      return searchUser;
+    }()
+  }, {
+    key: "usersList",
+    value: function () {
+      var _usersList = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+        var user;
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return _user["default"].find().sort('school');
+
+              case 3:
+                user = _context6.sent;
+                res.status(200).send(user);
+                _context6.next = 10;
+                break;
+
+              case 7:
+                _context6.prev = 7;
+                _context6.t0 = _context6["catch"](0);
+                res.status(400).json({
+                  error: _context6.t0.message
+                });
+
+              case 10:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 7]]);
+      }));
+
+      function usersList(_x11, _x12) {
         return _usersList.apply(this, arguments);
       }
 

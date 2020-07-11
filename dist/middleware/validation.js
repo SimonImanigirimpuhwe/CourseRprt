@@ -15,15 +15,14 @@ var signupValidation = function signupValidation(req, res, next) {
     lastName: _joi["default"].string().required(),
     username: _joi["default"].string().min(5).max(50).required(),
     email: _joi["default"].string().required().email(),
-    password: _joi["default"].string().min(8).max(1500).required(),
-    isProfessional: _joi["default"].string().required()
+    password: _joi["default"].string().min(8).max(1500).required()
   });
 
   var _schema$validate = schema.validate(req.body),
       error = _schema$validate.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };
@@ -40,7 +39,7 @@ var loginValidation = function loginValidation(req, res, next) {
       error = _schema$validate2.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };
@@ -54,15 +53,14 @@ var userValidation = function userValidation(req, res, next) {
     regNumber: _joi["default"].string().required(),
     school: _joi["default"].string().required(),
     faculty: _joi["default"].string().required(),
-    level: _joi["default"].string().required(),
-    password: _joi["default"].string().min(8).max(50)
+    level: _joi["default"].string().required()
   });
 
   var _schema$validate3 = schema.validate(req.body),
       error = _schema$validate3.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };
@@ -78,7 +76,7 @@ var userLoginValidation = function userLoginValidation(req, res, next) {
       error = _schema$validate4.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };
@@ -96,7 +94,7 @@ var editValidation = function editValidation(req, res, next) {
       error = _schema$validate5.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };
@@ -108,6 +106,7 @@ var reportValidation = function reportValidation(req, res, next) {
     school: _joi["default"].string().required(),
     faculty: _joi["default"].string().required(),
     level: _joi["default"].string().required(),
+    studentsNumber: _joi["default"].string().required(),
     days: _joi["default"].string().required(),
     date: _joi["default"].string().required(),
     hours: _joi["default"].string().required(),
@@ -122,7 +121,7 @@ var reportValidation = function reportValidation(req, res, next) {
       error = _schema$validate6.error;
 
   if (error) return res.status(400).send({
-    msg: error.details[0].message
+    error: error.details[0].message
   });
   next();
 };

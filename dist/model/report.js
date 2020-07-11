@@ -22,6 +22,10 @@ var reportSchema = new _mongoose["default"].Schema({
     type: String,
     required: true
   },
+  studentsNumber: {
+    type: String,
+    required: true
+  },
   days: {
     type: String,
     required: true
