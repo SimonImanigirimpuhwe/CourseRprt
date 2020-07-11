@@ -41,7 +41,7 @@ export const userValidation = (req, res, next) =>{
 
 export const userLoginValidation = (req, res, next) =>{
     const schema = Joi.object().keys({
-        regNumber: Joi.string().required(),
+        regNumber: Joi.string().required()
     });
     const { error } = schema.validate(req.body);
     if(error) return res.status(400).send({msg: error.details[0].message});
