@@ -13,8 +13,8 @@ app.use('/api/v1/admins', adminRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/report', reportRouter);
 
-app.get('', (req, res)=>{
-    res.status(200).json({msg:'Welcome to course report API.'})
+app.get('/', (req, res)=>{
+    res.status(200).json({msg:'A warmth Welcome to daily course report.'})
 });
 const port = process.env.PORT || 3000;
 
