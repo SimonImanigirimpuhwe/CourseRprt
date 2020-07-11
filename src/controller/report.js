@@ -10,13 +10,14 @@ class ReportController{
                 level:req.body.level
            
         });
-        if(report) return res.status(400).json({msg:'The report have been sumbitted before'});
+        if(report) return res.status(400).json({error:'The report have been sumbitted before'});
 
         const newReport = new Report({
            
             school:req.body.school,
             faculty:req.body.faculty,
             level:req.body.level,
+            studentsNumber: req.body.studentsNumber,
             days:req.body.days,
             date:req.body.date,
            body:{
@@ -30,9 +31,9 @@ class ReportController{
         });
         try{
             const reported = await newReport.save();
-            return res.status(200).send({reported});
+            return res.status(200).send({msg:'Report submitted successfully', reported});
         }catch(err){
-            return res.status(400).json({msg:err.message});
+            return res.status(400).json({error:err.message});
         }
     };
 
@@ -45,20 +46,20 @@ class ReportController{
                 ]
         });
 
-        if(searchedRprt.length === 0) return res.status(400).json({msg:'No such report in DB'});
+        if(searchedRprt.length === 0) return res.status(400).json({error:'No such report in DB'});
         res.status(200).send({searchedRprt})
-    }catch(err){
-        return res.status(500).json({err:'Internal error'})
+    }catch(error){
+        return res.status(500).json({error:'Internal error'})
     }
     };
 
     static async viewReports(req, res){
         try{
-            const allReport = await Report.find();
-            if(allReport.length === 0) return res.status(400).send({msg:'No reports found'})
-            res.status(200).json({allReport});
-        }catch(err){
-            return res.status(500).send({msg:'Internal error'})
+            const allReports = await Report.find();
+            if(allReports.length === 0) return res.status(400).send({error:'No reports found'})
+            res.status(200).json(allReports);
+        }catch(error){
+            return res.status(500).json({error:'Internal error'})
         }
     }
 }

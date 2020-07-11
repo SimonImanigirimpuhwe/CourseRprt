@@ -8,6 +8,7 @@ const userRouter = new Router();
 userRouter
 .post('/register',authentication, userValidation, UserController.addUser)
 .post('/login',userLoginValidation, UserController.login)
+.post('/search',authentication, UserController.searchUser)
 .put('/:id/edit', authentication, editValidation,  UserController.editUser)
 .delete('/:id/abolish', authentication, UserController.deleteUser)
 .get('/all', authentication, UserController.usersList);

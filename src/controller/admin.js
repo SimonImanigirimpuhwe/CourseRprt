@@ -6,7 +6,7 @@ class AdminController {
 
     static async signup(req, res){
         const emailExist = await Admin.findOne({email:req.body.email});
-        if(emailExist) return res.status(400).json({msg:`${emailExist.username} Already registered`});
+        if(emailExist) return res.status(400).json({error:`${emailExist.username} Already registered`});
 
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -17,7 +17,6 @@ class AdminController {
             username: req.body.username,
             email: req.body.email,
             password:hashPassword,
-            isProfessional: req.body.isProfessional
         })
         try{
             const savedAdmin = await admin.save();
@@ -32,6 +31,7 @@ class AdminController {
             } = savedAdmin;
 
            return res.send({
+               msg:'Admin registered succesfully',
                token,
                body:{
                 firstName,
@@ -49,11 +49,11 @@ class AdminController {
 
     static async login(req, res){
         const admin = await Admin.findOne({ username:req.body.username,});
-        if(!admin) return res.status(400).json({msg:'Invalid username or password'});
+        if(!admin) return res.status(400).json({error:'Invalid username or password'});
 
         try{
             const validPass = await bcrypt.compare(req.body.password, admin.password);
-            if(!validPass) return res.status(403).json({msg:'Invalid Password'});
+            if(!validPass) return res.status(403).json({error:'Invalid Password'});
             
             const token = generateToken(admin)
             res.status(200).json({msg:'Logged in successfully', token});

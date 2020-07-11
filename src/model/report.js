@@ -12,7 +12,12 @@ const reportSchema = new mongoose.Schema({
     },
     level:{
         type:String, 
-        required: true},
+        required: true
+    },
+    studentsNumber:{
+        type:String, 
+        required: true
+    },
     days:{type:String, required:true
     },
     date:{

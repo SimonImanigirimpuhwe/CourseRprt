@@ -21,9 +21,6 @@ const adminSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    status:{
-        isProfessional: Boolean
-    }
 });
 const Admin = mongoose.model('Admin', adminSchema);
 

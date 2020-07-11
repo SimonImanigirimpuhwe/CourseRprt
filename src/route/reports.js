@@ -7,8 +7,8 @@ import { reportValidation } from '../middleware/validation';
 const reportRouter = new Router();
 
 reportRouter
-.post('/', auth, reportValidation, ReportController.submitReport)
+.post('/',auth, reportValidation, ReportController.submitReport)
 .post('/search',authentication, ReportController.searchReport)
-.get('/all', authentication, ReportController.viewReports)
+.get('/all', authentication,  ReportController.viewReports)
 
 export default reportRouter;

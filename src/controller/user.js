@@ -5,7 +5,7 @@ import generateToken from '../helper/createToken';
 class UserController{
     static async addUser(req, res){
         const user = await User.findOne({regNumber:req.body.regNumber});
-        if(user)return res.status(400).send({msg:`User with regNumber ${user.regNumber} was registered before`});
+        if(user) return res.status(400).json({error:`User with regNumber ${user.regNumber} was registered before`});
 
         const cp = new User({
             firstName: req.body.firstName,
@@ -19,7 +19,7 @@ class UserController{
         });
         try{
             const savedCp = await cp.save();
-            res.status(200).send(savedCp);
+            res.status(200).send({msg:'Class Representative added successfully', savedCp});
         }catch(error){
             return res.status(400).json({error:error.message});
         }   
@@ -27,13 +27,13 @@ class UserController{
 
     static async login(req, res){
        const  user = await User.findOne({regNumber:req.body.regNumber});
-       if(!user) return res.status(401).json({msg:'Unauthorized'});
+       if(!user) return res.status(401).json({error:'Unauthorized'});
 
        try{
         const token = generateToken(user);
         return res.status(200).json({msg:'Logged in successfully', token})
        }catch(err){
-           return res.status(500).send({msg:'Internal error'})
+           return res.status(500).send({error:'Internal error'})
        }
     };
     
@@ -47,9 +47,9 @@ class UserController{
             }
         }
         },{new:true});
-            return res.status(200).send(newUser);
+            return res.status(200).send({msg:'User updated successfully', newUser});
         }catch(err){                  
-            return res.status(500).json({msg:`User with given regNumber is not found`})
+            return res.status(500).json({error:`User with given regNumber is not found`})
         }
     };
 
@@ -58,10 +58,26 @@ class UserController{
         const user = await User.findByIdAndRemove(req.params.id, { new: true });
         return res.status(200).send(user)
         }catch(err){
-        return res.status(400).json({msg:`Class Representative with given regNumber  is not found`});
+        return res.status(400).json({error:`Class Representative with given regNumber  is not found`});
         }
 
     };
+
+    static async searchUser(req, res){
+        try{
+         const searchedUser = await User.find({
+          $or:[
+               {firstName: req.body.firstName},
+               {lastName: req.body.lastName},
+               {regNumber: req.body.regNumber}
+            ]
+        });
+        if(searchedUser.length === 0) return res.status(400).json({error:'No such user in database'})
+        res.status(200).send({searchedUser})
+    }catch(error){
+        return res.status(500).send({error:'Internal error'})
+    };
+    }
 
     static async usersList(req, res){
         try{
