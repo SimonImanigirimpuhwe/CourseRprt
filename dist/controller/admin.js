@@ -50,7 +50,7 @@ var AdminController = /*#__PURE__*/function () {
                 }
 
                 return _context.abrupt("return", res.status(400).json({
-                  msg: "".concat(emailExist.username, " Already registered")
+                  error: "".concat(emailExist.username, " Already registered")
                 }));
 
               case 5:
@@ -69,8 +69,7 @@ var AdminController = /*#__PURE__*/function () {
                   lastName: req.body.lastName,
                   username: req.body.username,
                   email: req.body.email,
-                  password: hashPassword,
-                  isProfessional: req.body.isProfessional
+                  password: hashPassword
                 });
                 _context.prev = 12;
                 _context.next = 15;
@@ -81,6 +80,7 @@ var AdminController = /*#__PURE__*/function () {
                 token = (0, _createToken["default"])(savedAdmin);
                 firstName = savedAdmin.firstName, lastName = savedAdmin.lastName, username = savedAdmin.username, email = savedAdmin.email, _id = savedAdmin._id;
                 return _context.abrupt("return", res.send({
+                  msg: 'Admin registered succesfully',
                   token: token,
                   body: {
                     firstName: firstName,
@@ -138,7 +138,7 @@ var AdminController = /*#__PURE__*/function () {
                 }
 
                 return _context2.abrupt("return", res.status(400).json({
-                  msg: 'Invalid username or password'
+                  error: 'Invalid username or password'
                 }));
 
               case 5:
@@ -155,7 +155,7 @@ var AdminController = /*#__PURE__*/function () {
                 }
 
                 return _context2.abrupt("return", res.status(403).json({
-                  msg: 'Invalid Password'
+                  error: 'Invalid Password'
                 }));
 
               case 11:

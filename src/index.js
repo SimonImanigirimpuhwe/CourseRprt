@@ -34,4 +34,4 @@ mongoose.connect(url, {
     console.log('Connected to DB')})
 
 app.listen(port, 
-    () => console.log(`App running on http://localhost:${port}/api/v1...`))
+    () => console.log(`App running on ${port}...`))

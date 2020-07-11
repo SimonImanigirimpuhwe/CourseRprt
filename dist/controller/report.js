@@ -48,7 +48,7 @@ var ReportController = /*#__PURE__*/function () {
                 }
 
                 return _context.abrupt("return", res.status(400).json({
-                  msg: 'The report have been sumbitted before'
+                  error: 'The report have been sumbitted before'
                 }));
 
               case 5:
@@ -56,6 +56,7 @@ var ReportController = /*#__PURE__*/function () {
                   school: req.body.school,
                   faculty: req.body.faculty,
                   level: req.body.level,
+                  studentsNumber: req.body.studentsNumber,
                   days: req.body.days,
                   date: req.body.date,
                   body: {
@@ -74,6 +75,7 @@ var ReportController = /*#__PURE__*/function () {
               case 9:
                 reported = _context.sent;
                 return _context.abrupt("return", res.status(200).send({
+                  msg: 'Report submitted successfully',
                   reported: reported
                 }));
 
@@ -81,7 +83,7 @@ var ReportController = /*#__PURE__*/function () {
                 _context.prev = 13;
                 _context.t0 = _context["catch"](6);
                 return _context.abrupt("return", res.status(400).json({
-                  msg: _context.t0.message
+                  error: _context.t0.message
                 }));
 
               case 16:
@@ -126,7 +128,7 @@ var ReportController = /*#__PURE__*/function () {
                 }
 
                 return _context2.abrupt("return", res.status(400).json({
-                  msg: 'No such report in DB'
+                  error: 'No such report in DB'
                 }));
 
               case 6:
@@ -140,7 +142,7 @@ var ReportController = /*#__PURE__*/function () {
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 return _context2.abrupt("return", res.status(500).json({
-                  err: 'Internal error'
+                  error: 'Internal error'
                 }));
 
               case 12:
@@ -161,7 +163,7 @@ var ReportController = /*#__PURE__*/function () {
     key: "viewReports",
     value: function () {
       var _viewReports = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-        var allReport;
+        var allReports;
         return _regenerator["default"].wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -171,29 +173,27 @@ var ReportController = /*#__PURE__*/function () {
                 return _report["default"].find();
 
               case 3:
-                allReport = _context3.sent;
+                allReports = _context3.sent;
 
-                if (!(allReport.length === 0)) {
+                if (!(allReports.length === 0)) {
                   _context3.next = 6;
                   break;
                 }
 
                 return _context3.abrupt("return", res.status(400).send({
-                  msg: 'No reports found'
+                  error: 'No reports found'
                 }));
 
               case 6:
-                res.status(200).json({
-                  allReport: allReport
-                });
+                res.status(200).json(allReports);
                 _context3.next = 12;
                 break;
 
               case 9:
                 _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
-                return _context3.abrupt("return", res.status(500).send({
-                  msg: 'Internal error'
+                return _context3.abrupt("return", res.status(500).json({
+                  error: 'Internal error'
                 }));
 
               case 12:

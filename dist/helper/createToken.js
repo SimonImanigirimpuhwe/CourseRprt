@@ -19,8 +19,7 @@ var generateToken = function generateToken(info) {
   try {
     var token = _jsonwebtoken["default"].sign({
       _id: info._id,
-      username: info.username,
-      isProfessional: info.isProfessional
+      username: info.username
     }, secretKey, {
       algorithm: 'HS256',
       expiresIn: '5d'
@@ -29,7 +28,7 @@ var generateToken = function generateToken(info) {
     return token;
   } catch (error) {
     throw new Error({
-      err: 'Internal error'
+      error: 'Internal error'
     });
   }
 };

@@ -35,10 +35,6 @@ var userSchema = new _mongoose["default"].Schema({
       type: String,
       required: true
     }
-  },
-  password: {
-    type: String,
-    required: true
   }
 });
 
