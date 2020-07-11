@@ -37,7 +37,7 @@ const staging ={
 };
 const production = {
     app:{
-        port: 3000,
+        port: process.env.PORT,
         secretKey:process.env.SECRET_KEY,
     },
     db:{
