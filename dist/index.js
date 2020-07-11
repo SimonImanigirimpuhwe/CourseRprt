@@ -23,9 +23,9 @@ app.use((0, _cors["default"])());
 app.use((0, _helmet["default"])());
 app.use((0, _compression["default"])());
 app.use(_express["default"].json());
-app.use('/api/v1/admins', _admins["default"]);
-app.use('/api/v1/users', _users["default"]);
-app.use('/api/v1/report', _reports["default"]);
+app.use('/api/admins', _admins["default"]);
+app.use('/api/users', _users["default"]);
+app.use('/api/report', _reports["default"]);
 app.get('/', function (req, res) {
   res.status(200).json({
     msg: 'A warmth Welcome to daily courses report.'
