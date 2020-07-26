@@ -30,7 +30,7 @@ class AdminController {
                 _id,
             } = savedAdmin;
 
-           return res.send({
+           return res.json({
                msg:'Admin registered succesfully',
                token,
                body:{
@@ -42,7 +42,7 @@ class AdminController {
                }
             });         
         }catch(error){
-            return res.status(500).send({error:error.message});
+            return res.status(500).json({error:error.message});
         };
 
     };
@@ -58,7 +58,7 @@ class AdminController {
             const token = generateToken(admin)
             res.status(200).json({msg:'Logged in successfully', token});
         }catch(error){
-            return res.status(500).send({error: error.message})
+            return res.status(500).json({error: error.message})
         }
     };
 }

@@ -31,7 +31,7 @@ class ReportController{
         });
         try{
             const reported = await newReport.save();
-            return res.status(200).send({msg:'Report submitted successfully', reported});
+            return res.status(200).json({msg:'Report submitted successfully', reported});
         }catch(err){
             return res.status(400).json({error:err.message});
         }
@@ -47,7 +47,7 @@ class ReportController{
         });
 
         if(searchedRprt.length === 0) return res.status(400).json({error:'No such report in DB'});
-        res.status(200).send({searchedRprt})
+        res.status(200).json({searchedRprt})
     }catch(error){
         return res.status(500).json({error:'Internal error'})
     }
