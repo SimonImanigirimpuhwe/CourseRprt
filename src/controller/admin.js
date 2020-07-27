@@ -30,7 +30,7 @@ class AdminController {
                 _id,
             } = savedAdmin;
 
-           return res.json({
+           return res.status(200).json({
                msg:'Admin registered succesfully',
                token,
                body:{
