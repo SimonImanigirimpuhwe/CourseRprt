@@ -47,18 +47,24 @@ class UserController{
             }
         }
         },{new:true});
+
+            if(!newUser) return res.status(400).json({error:`User with given regNumber is not found`})
+
             return res.status(200).json({msg:'User updated successfully', newUser});
         }catch(err){                  
-            return res.status(500).json({error:`User with given regNumber is not found`})
+            return res.status(500).json({error:err.message})
         }
     };
 
     static async deleteUser(req, res){
         try{
         const user = await User.findByIdAndRemove(req.params.id, { new: true });
+
+        if(!user) return res.status(400).json({error:`Class Representative with given regNumber  is not found`});
+
         return res.status(200).json(user)
         }catch(err){
-        return res.status(400).json({error:`Class Representative with given regNumber  is not found`});
+        return res.status(500).json({error: err.message});
         }
 
     };
@@ -75,13 +81,14 @@ class UserController{
         if(searchedUser.length === 0) return res.status(400).json({error:'No such user in database'})
         return res.status(200).json({searchedUser})
     }catch(error){
-        return res.status(500).json({error:'Internal error'})
+        return res.status(500).json({error:error.message})
     };
     }
 
     static async usersList(req, res){
         try{
         const user = await User.find().sort('school');
+        if(!user) return res.status(400).json({error: 'No users in DB yet'})
        return res.status(200).json(user);
     }catch(err){
         res.status(400).json({error:err.message})

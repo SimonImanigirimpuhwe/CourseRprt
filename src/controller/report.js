@@ -49,7 +49,7 @@ class ReportController{
         if(searchedRprt.length === 0) return res.status(400).json({error:'No such report in DB'});
        return res.status(200).json({searchedRprt})
     }catch(error){
-        return res.status(500).json({error:'Internal error'})
+        return res.status(500).json({error: error.message})
     }
     };
 
@@ -59,7 +59,7 @@ class ReportController{
             if(allReports.length === 0) return res.status(400).send({error:'No reports found'})
             res.status(200).json(allReports);
         }catch(error){
-            return res.status(500).json({error:'Internal error'})
+            return res.status(500).json({error:error.message})
         }
     }
 }
