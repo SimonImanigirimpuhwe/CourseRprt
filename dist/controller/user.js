@@ -69,12 +69,10 @@ var UserController = /*#__PURE__*/function () {
 
               case 9:
                 savedCp = _context.sent;
-                res.status(200).send({
+                return _context.abrupt("return", res.status(200).json({
                   msg: 'Class Representative added successfully',
                   savedCp: savedCp
-                });
-                _context.next = 16;
-                break;
+                }));
 
               case 13:
                 _context.prev = 13;
@@ -134,7 +132,7 @@ var UserController = /*#__PURE__*/function () {
               case 10:
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](5);
-                return _context2.abrupt("return", res.status(500).send({
+                return _context2.abrupt("return", res.status(500).json({
                   error: 'Internal error'
                 }));
 
@@ -177,24 +175,35 @@ var UserController = /*#__PURE__*/function () {
 
               case 3:
                 newUser = _context3.sent;
-                return _context3.abrupt("return", res.status(200).send({
+
+                if (newUser) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return", res.status(400).json({
+                  error: "User with given regNumber is not found"
+                }));
+
+              case 6:
+                return _context3.abrupt("return", res.status(200).json({
                   msg: 'User updated successfully',
                   newUser: newUser
                 }));
 
-              case 7:
-                _context3.prev = 7;
+              case 9:
+                _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
                 return _context3.abrupt("return", res.status(500).json({
-                  error: "User with given regNumber is not found"
+                  error: _context3.t0.message
                 }));
 
-              case 10:
+              case 12:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 7]]);
+        }, _callee3, null, [[0, 9]]);
       }));
 
       function editUser(_x5, _x6) {
@@ -220,21 +229,32 @@ var UserController = /*#__PURE__*/function () {
 
               case 3:
                 user = _context4.sent;
-                return _context4.abrupt("return", res.status(200).send(user));
 
-              case 7:
-                _context4.prev = 7;
-                _context4.t0 = _context4["catch"](0);
+                if (user) {
+                  _context4.next = 6;
+                  break;
+                }
+
                 return _context4.abrupt("return", res.status(400).json({
                   error: "Class Representative with given regNumber  is not found"
                 }));
 
-              case 10:
+              case 6:
+                return _context4.abrupt("return", res.status(200).json(user));
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](0);
+                return _context4.abrupt("return", res.status(500).json({
+                  error: _context4.t0.message
+                }));
+
+              case 12:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 7]]);
+        }, _callee4, null, [[0, 9]]);
       }));
 
       function deleteUser(_x7, _x8) {
@@ -277,17 +297,15 @@ var UserController = /*#__PURE__*/function () {
                 }));
 
               case 6:
-                res.status(200).send({
+                return _context5.abrupt("return", res.status(200).json({
                   searchedUser: searchedUser
-                });
-                _context5.next = 12;
-                break;
+                }));
 
               case 9:
                 _context5.prev = 9;
                 _context5.t0 = _context5["catch"](0);
-                return _context5.abrupt("return", res.status(500).send({
-                  error: 'Internal error'
+                return _context5.abrupt("return", res.status(500).json({
+                  error: _context5.t0.message
                 }));
 
               case 12:
@@ -322,23 +340,32 @@ var UserController = /*#__PURE__*/function () {
 
               case 3:
                 user = _context6.sent;
-                res.status(200).send(user);
-                _context6.next = 10;
-                break;
 
-              case 7:
-                _context6.prev = 7;
+                if (user) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                return _context6.abrupt("return", res.status(400).json({
+                  error: 'No users in DB yet'
+                }));
+
+              case 6:
+                return _context6.abrupt("return", res.status(200).json(user));
+
+              case 9:
+                _context6.prev = 9;
                 _context6.t0 = _context6["catch"](0);
                 res.status(400).json({
                   error: _context6.t0.message
                 });
 
-              case 10:
+              case 12:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 7]]);
+        }, _callee6, null, [[0, 9]]);
       }));
 
       function usersList(_x11, _x12) {

@@ -79,7 +79,7 @@ var AdminController = /*#__PURE__*/function () {
                 savedAdmin = _context.sent;
                 token = (0, _createToken["default"])(savedAdmin);
                 firstName = savedAdmin.firstName, lastName = savedAdmin.lastName, username = savedAdmin.username, email = savedAdmin.email, _id = savedAdmin._id;
-                return _context.abrupt("return", res.send({
+                return _context.abrupt("return", res.status(200).json({
                   msg: 'Admin registered succesfully',
                   token: token,
                   body: {
@@ -94,7 +94,7 @@ var AdminController = /*#__PURE__*/function () {
               case 21:
                 _context.prev = 21;
                 _context.t0 = _context["catch"](12);
-                return _context.abrupt("return", res.status(500).send({
+                return _context.abrupt("return", res.status(500).json({
                   error: _context.t0.message
                 }));
 
@@ -160,17 +160,15 @@ var AdminController = /*#__PURE__*/function () {
 
               case 11:
                 token = (0, _createToken["default"])(admin);
-                res.status(200).json({
+                return _context2.abrupt("return", res.status(200).json({
                   msg: 'Logged in successfully',
                   token: token
-                });
-                _context2.next = 18;
-                break;
+                }));
 
               case 15:
                 _context2.prev = 15;
                 _context2.t0 = _context2["catch"](5);
-                return _context2.abrupt("return", res.status(500).send({
+                return _context2.abrupt("return", res.status(500).json({
                   error: _context2.t0.message
                 }));
 

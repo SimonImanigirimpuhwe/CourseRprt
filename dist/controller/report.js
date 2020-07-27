@@ -74,7 +74,7 @@ var ReportController = /*#__PURE__*/function () {
 
               case 9:
                 reported = _context.sent;
-                return _context.abrupt("return", res.status(200).send({
+                return _context.abrupt("return", res.status(200).json({
                   msg: 'Report submitted successfully',
                   reported: reported
                 }));
@@ -132,17 +132,15 @@ var ReportController = /*#__PURE__*/function () {
                 }));
 
               case 6:
-                res.status(200).send({
+                return _context2.abrupt("return", res.status(200).json({
                   searchedRprt: searchedRprt
-                });
-                _context2.next = 12;
-                break;
+                }));
 
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 return _context2.abrupt("return", res.status(500).json({
-                  error: 'Internal error'
+                  error: _context2.t0.message
                 }));
 
               case 12:
@@ -193,7 +191,7 @@ var ReportController = /*#__PURE__*/function () {
                 _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
                 return _context3.abrupt("return", res.status(500).json({
-                  error: 'Internal error'
+                  error: _context3.t0.message
                 }));
 
               case 12:
