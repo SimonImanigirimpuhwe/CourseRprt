@@ -19,7 +19,7 @@ class UserController{
         });
         try{
             const savedCp = await cp.save();
-            res.status(200).json({msg:'Class Representative added successfully', savedCp});
+            return res.status(200).json({msg:'Class Representative added successfully', savedCp});
         }catch(error){
             return res.status(400).json({error:error.message});
         }   
@@ -73,7 +73,7 @@ class UserController{
             ]
         });
         if(searchedUser.length === 0) return res.status(400).json({error:'No such user in database'})
-        res.status(200).json({searchedUser})
+        return res.status(200).json({searchedUser})
     }catch(error){
         return res.status(500).json({error:'Internal error'})
     };
@@ -82,7 +82,7 @@ class UserController{
     static async usersList(req, res){
         try{
         const user = await User.find().sort('school');
-        res.status(200).json(user);
+       return res.status(200).json(user);
     }catch(err){
         res.status(400).json({error:err.message})
     }
