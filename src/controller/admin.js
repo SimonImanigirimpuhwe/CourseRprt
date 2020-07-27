@@ -56,7 +56,7 @@ class AdminController {
             if(!validPass) return res.status(403).json({error:'Invalid Password'});
             
             const token = generateToken(admin)
-            res.status(200).json({msg:'Logged in successfully', token});
+            return res.status(200).json({msg:'Logged in successfully', token});
         }catch(error){
             return res.status(500).json({error: error.message})
         }
