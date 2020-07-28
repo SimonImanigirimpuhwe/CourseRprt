@@ -88,7 +88,8 @@ class UserController{
     static async usersList(req, res){
         try{
         const user = await User.find().sort('school');
-        if(!user) return res.status(400).json({error: 'No users in DB yet'})
+        if(!user) return res.status(400).json({error: 'No Class Representatives in Database yet'})
+
        return res.status(200).json(user);
     }catch(err){
         res.status(400).json({error:err.message})
