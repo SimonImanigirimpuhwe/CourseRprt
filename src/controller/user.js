@@ -21,7 +21,7 @@ class UserController{
             const savedCp = await cp.save();
             return res.status(200).json({msg:'Class Representative added successfully', savedCp});
         }catch(error){
-            return res.status(400).json({error:error.message});
+            return res.status(500).json({error:error.message});
         }   
     };
 
@@ -48,7 +48,7 @@ class UserController{
         }
         },{new:true});
 
-            if(!newUser) return res.status(400).json({error:`User with given regNumber is not found`})
+            if(!newUser) return res.status(404).json({error:`User with given regNumber is not found`})
 
             return res.status(200).json({msg:'User updated successfully', newUser});
         }catch(err){                  
@@ -60,7 +60,7 @@ class UserController{
         try{
         const user = await User.findByIdAndRemove(req.params.id, { new: true });
 
-        if(!user) return res.status(400).json({error:`Class Representative with given regNumber  is not found`});
+        if(!user) return res.status(404).json({error:`Class Representative with given regNumber  is not found`});
 
         return res.status(200).json(user)
         }catch(err){
@@ -78,7 +78,7 @@ class UserController{
                {regNumber: req.body.regNumber}
             ]
         });
-        if(searchedUser.length === 0) return res.status(400).json({error:'No such user in database'})
+        if(searchedUser.length === 0) return res.status(404).json({error:'No such user in database'})
         return res.status(200).json({searchedUser})
     }catch(error){
         return res.status(500).json({error:error.message})
@@ -88,11 +88,11 @@ class UserController{
     static async usersList(req, res){
         try{
         const user = await User.find().sort('school');
-        if(!user) return res.status(400).json({error: 'No Class Representatives in Database yet'})
+        if(!user) return res.status(404).json({error: 'No Class Representatives in Database yet'})
 
        return res.status(200).json(user);
     }catch(err){
-        res.status(400).json({error:err.message})
+        res.status(500).json({error:err.message})
     }
     }
 };

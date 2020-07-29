@@ -46,7 +46,7 @@ class ReportController{
                 ]
         });
 
-        if(searchedRprt.length === 0) return res.status(400).json({error:'No such report in DB'});
+        if(searchedRprt.length === 0) return res.status(404).json({error:'No such report in DB'});
        return res.status(200).json({searchedRprt})
     }catch(error){
         return res.status(500).json({error: error.message})
@@ -56,7 +56,7 @@ class ReportController{
     static async viewReports(req, res){
         try{
             const allReports = await Report.find();
-            if(allReports.length === 0) return res.status(400).send({error:'No reports found'})
+            if(allReports.length === 0) return res.status(404).send({error:'No reports found'})
             res.status(200).json(allReports);
         }catch(error){
             return res.status(500).json({error:error.message})
