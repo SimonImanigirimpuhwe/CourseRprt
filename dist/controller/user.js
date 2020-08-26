@@ -175,6 +175,10 @@ var UserController = /*#__PURE__*/function () {
 
               case 3:
                 newUser = _context3.sent;
+                return _context3.abrupt("return", res.status(200).send({
+                  msg: 'User updated successfully',
+                  newUser: newUser
+                }));
 
                 if (newUser) {
                   _context3.next = 6;
@@ -313,7 +317,7 @@ var UserController = /*#__PURE__*/function () {
 
               case 13:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
         }, _callee5, null, [[0, 9]]);
